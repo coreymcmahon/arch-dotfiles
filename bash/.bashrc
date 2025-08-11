@@ -17,6 +17,8 @@ export NVM_DIR="$HOME/.nvm"
 # Variables and settings used in interactive shells
 
 # Aliases
+alias q="exit"
+# Git
 alias g=git
 alias ga="git add"
 alias gd="git diff"
