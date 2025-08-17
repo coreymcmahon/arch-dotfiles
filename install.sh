@@ -9,8 +9,11 @@ sudo pacman -Sy --needed \
   man-db man-pages tree htop unzip zip tar \
   openssh rsync whois \
   bash-completion alacritty zellij btop stow \
-  docker docker-compose \
   re2c gd oniguruma postgresql-libs
+
+###
+# Install Docker
+sudo bin/install-docker.sh
 
 ###
 # Install yay
