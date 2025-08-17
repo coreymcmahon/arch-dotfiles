@@ -4,13 +4,13 @@ set -euo pipefail
 
 ###
 # Install core dependencies
-sudo pacman -Sy --needed base-devel git sudo neovim nano wget curl \
+sudo pacman -Sy --needed \
+  base-devel git sudo neovim nano wget curl \
   man-db man-pages tree htop unzip zip tar \
   openssh rsync whois \
-  bash-completion alacritty btop \
+  bash-completion alacritty zellij btop stow \
   docker docker-compose \
-  re2c gd oniguruma \
-  postgresql-libs
+  re2c gd oniguruma postgresql-libs
 
 ###
 # Install yay
@@ -63,7 +63,6 @@ if ! grep -Fxq 'eval "$(mise activate bash)"' ~/.bashrc; then
   echo "Activating mise..."
   echo 'eval "$(mise activate bash)"' >> ~/.bashrc
 fi
-
 
 ###
 #
