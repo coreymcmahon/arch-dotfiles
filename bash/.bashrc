@@ -1,9 +1,9 @@
-#
-# ~/.bashrc
-#
-
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
+###
+# Secrets
+# - Add sensitive aliases etc. to .bashrc.secrets
+if [ -f "$HOME/.bashrc.secrets" ]; then
+    source "$HOME/.bashrc.secrets"
+fi
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
