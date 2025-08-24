@@ -28,7 +28,7 @@ require("lazy").setup({
     lazy = false,
     version = false,
   },
-  install = { colorscheme = { "habamax" } },
+  -- install = { colorscheme = { "habamax" } },
   checker = { enabled = false },
   performance = {
     rtp = {
@@ -45,3 +45,8 @@ require("lazy").setup({
     },
   },
 })
+
+require("config.languages").setup({
+  prefer_editorconfig = true, -- let .editorconfig win (set to false to force Neovim settings)
+})
+
