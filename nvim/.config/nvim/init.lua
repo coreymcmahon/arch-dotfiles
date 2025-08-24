@@ -50,3 +50,18 @@ require("config.languages").setup({
   prefer_editorconfig = true, -- let .editorconfig win (set to false to force Neovim settings)
 })
 
+-- Auto-close empty unnamed buffers when opening a file
+vim.api.nvim_create_autocmd("BufHidden", {
+  callback = function(event)
+    if vim.bo[event.buf].buftype == "" and vim.fn.bufname(event.buf) == "" then
+      if vim.fn.getbufline(event.buf, 1, "$")[1] == "" and #vim.fn.getbufline(event.buf, 1, "$") == 1 then
+        vim.schedule(function()
+          if vim.api.nvim_buf_is_valid(event.buf) then
+            vim.api.nvim_buf_delete(event.buf, { force = true })
+          end
+        end)
+      end
+    end
+  end,
+})
+

@@ -9,7 +9,8 @@ opt.tabstop = 2
 opt.shiftwidth = 2
 opt.expandtab = true
 opt.autoindent = true
-opt.smartindent = true
+opt.smartindent = false  -- Disable smartindent as it can conflict with filetype indentation
+opt.cindent = false  -- Let filetype plugins handle this
 
 -- Line wrapping
 opt.wrap = false

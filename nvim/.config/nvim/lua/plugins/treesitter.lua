@@ -15,7 +15,11 @@ return {
     },
     opts = {
       highlight = { enable = true },
-      indent = { enable = true },
+      indent = { 
+        enable = true,
+        -- Disable for PHP and Blade - using StanAngeloff/php.vim for better PHP indentation
+        disable = { "php", "blade" },
+      },
       ensure_installed = {
         "bash",
         "c",
