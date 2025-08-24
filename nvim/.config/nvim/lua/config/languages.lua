@@ -2,8 +2,17 @@ local M = {}
 
 -- Edit this table to add/adjust filetype rules.
 M.specs = {
-  -- PHP: 4 spaces
-  { patterns = { "php" }, opts = { shiftwidth = 4, tabstop = 4, expandtab = true } },
+  -- PHP: 4 spaces, let php.vim handle the indentation logic
+  { 
+    patterns = { "php" }, 
+    opts = { 
+      shiftwidth = 4, 
+      tabstop = 4, 
+      expandtab = true,
+      autoindent = true,
+      -- Don't set smartindent or cindent - let the PHP plugin handle it
+    } 
+  },
 
   -- JS/TS: 2 spaces
   {

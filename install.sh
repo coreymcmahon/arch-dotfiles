@@ -9,7 +9,8 @@ sudo pacman -Sy --needed \
   man-db man-pages tree htop unzip zip tar \
   openssh rsync whois \
   bash-completion alacritty zellij btop stow \
-  re2c gd oniguruma postgresql-libs
+  re2c gd oniguruma postgresql-libs \
+  ripgrep fd
 
 ###
 # Install Docker
