@@ -8,8 +8,7 @@
     "hyprland/workspaces"
   ],
   "modules-center": [
-    "clock",
-    "custom/update"
+    "clock"
   ],
   "modules-right": [
     "group/tray-expander",
@@ -17,7 +16,7 @@
     "network",
     "pulseaudio",
     "cpu",
-    "battery"
+    "custom/lock"
   ],
   "hyprland/workspaces": {
     "on-click": "activate",
@@ -39,8 +38,7 @@
       "1": [],
       "2": [],
       "3": [],
-      "4": [],
-      "5": []
+      "4": []
     }
   },
   "cpu": {
@@ -49,10 +47,8 @@
     "on-click": "alacritty -e btop"
   },
   "clock": {
-    "format": "{:%A %H:%M}",
-    "format-alt": "{:%d %B W%V %Y}",
-    "tooltip": false,
-    "on-click-right": "~/.local/share/omarchy/bin/omarchy-cmd-tzupdate"
+    "format": "{:%A, %B %d — %H:%M %p}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
   "network": {
     "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
@@ -66,28 +62,6 @@
     "interval": 3,
     "nospacing": 1,
     "on-click": "alacritty --class=Impala -e impala"
-  },
-  "battery": {
-    "format": "{capacity}% {icon}",
-    "format-discharging": "{icon}",
-    "format-charging":    "{icon}",
-    "format-plugged":     "",
-    "format-icons": {
-      "charging": [
-        "󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"
-      ],
-      "default": [
-        "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"
-      ]
-    },
-    "format-full": "󰂅",
-    "tooltip-format-discharging": "{power:>1.0f}W↓ {capacity}%",
-    "tooltip-format-charging": "{power:>1.0f}W↑ {capacity}%",
-    "interval": 5,
-    "states": {
-      "warning": 20,
-      "critical": 10
-    }
   },
   "bluetooth": {
     "format": "",
@@ -115,7 +89,7 @@
     },
     "modules": [
       "custom/expand-icon",
-    "tray"
+      "tray"
     ]
   },
   "custom/expand-icon": {
@@ -125,5 +99,9 @@
   "tray": {
     "icon-size": 12,
     "spacing": 12
+  },
+  "custom/lock": {
+    "format": "",
+    "on-click": "hyprlock"
   }
 }
