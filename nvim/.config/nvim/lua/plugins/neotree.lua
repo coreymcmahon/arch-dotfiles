@@ -13,6 +13,24 @@ return {
       { "<leader>e", function() vim.cmd("Neotree toggle reveal left") end, desc = "Explorer" },
       { "<leader>E", function() vim.cmd("Neotree toggle float") end, desc = "Explorer (float)" },
     },
+    init = function()
+      -- Auto-open Neo-tree when vim starts with a directory
+      vim.api.nvim_create_autocmd("VimEnter", {
+        callback = function(data)
+          -- Check if we opened a directory
+          local directory = vim.fn.isdirectory(data.file) == 1
+          
+          if directory then
+            -- Change to the directory
+            vim.cmd.cd(data.file)
+            -- Wipe the empty buffer
+            vim.cmd("bwipeout")
+            -- Open Neo-tree (only once)
+            vim.cmd("Neotree filesystem reveal left")
+          end
+        end,
+      })
+    end,
     opts = {
       close_if_last_window = true,
       popup_border_style = "rounded",
@@ -28,10 +46,19 @@ return {
           { source = "git_status", display_name = " Git" },
         },
       },
+      window = {
+        position = "left",
+        width = 32,
+        mapping_options = {
+          noremap = true,
+          nowait = true,
+        },
+      },
       filesystem = {
         bind_to_cwd = true,
         follow_current_file = { enabled = true, leave_dirs_open = false },
         use_libuv_file_watcher = true,
+        hijack_netrw_behavior = "disabled",  -- Disable netrw hijacking to prevent double opening
         filtered_items = {
           visible = false,  -- set true to show “hidden” entries by default
           hide_dotfiles = true,
@@ -66,7 +93,6 @@ return {
         },
         indent = { with_expanders = true, expander_collapsed = "", expander_expanded = "" },
       },
-      window = { width = 32 },
     },
   },
 }
