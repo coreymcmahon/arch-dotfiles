@@ -14,7 +14,7 @@ return {
     priority = 100,  -- Load before other PHP plugins
     config = function()
       -- This provides better PHP syntax and indentation
-      vim.g.php_version_id = 80200  -- PHP 8.2
+      vim.g.php_version_id = 80400  -- PHP 8.4
       vim.g.php_html_load = 0
       vim.g.php_sql_query = 0
       vim.g.php_sql_heredoc = 0
@@ -74,7 +74,8 @@ return {
       "nvim-telescope/telescope.nvim",
       "tpope/vim-dotenv",
       "MunifTanjim/nui.nvim",
-      "kevinhwang91/promise-async",  -- Required dependency for async operations
+      "nvim-lua/plenary.nvim",
+      "nvim-neotest/nvim-nio",
     },
     cmd = { "Sail", "Artisan", "Composer", "Npm", "Yarn", "Laravel" },
     keys = {
