@@ -15,6 +15,7 @@
     "bluetooth",
     "network",
     "pulseaudio",
+    "battery",
     "cpu",
     "custom/lock"
   ],
@@ -41,13 +42,25 @@
       "4": []
     }
   },
+  "battery": {
+    "interval": 30,
+    "format": "{icon}",
+    "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰁹"],
+    "format-charging": "󰂄",
+    "format-plugged": "󰚥",
+    "tooltip-format": "{capacity}% ({timeTo})",
+    "states": {
+      "warning": 20,
+      "critical": 10
+    }
+  },
   "cpu": {
     "interval": 5,
     "format": "󰍛",
     "on-click": "ghostty -e btop"
   },
   "clock": {
-    "format": "{:%A, %B %d — %H:%M %p}",
+    "format": "{:%A, %B %d — %H:%M}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
   "network": {

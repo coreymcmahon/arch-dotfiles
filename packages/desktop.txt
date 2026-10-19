@@ -1,17 +1,18 @@
 # Hyprland desktop (official repos). Installed by the "desktop" stage.
 # GPU drivers are selected separately from packages/gpu-*.txt.
 
-# Compositor and Hypr ecosystem
-hyprland hyprpaper hypridle hyprlock hyprpicker hyprshot hyprsunset
+# Compositor and Hypr ecosystem (hyprshutdown is bound to SUPER+M)
+hyprland hyprpaper hypridle hyprlock hyprpicker hyprshot hyprsunset hyprshutdown
 xdg-desktop-portal-hyprland xdg-desktop-portal-gtk
 
 # Polkit agent (launched from hyprland.conf)
 polkit-gnome
 
-# Bar, notifications, OSD, wallpaper fallback
-waybar mako swayosd swaybg
+# Bar, notifications (mako stow group), on-screen display for media keys
+waybar mako swayosd
 
 # Tools referenced by hyprland.conf / hypridle.conf / waybar
+# (swayosd brightness control needs the user in the "video" group; the services stage adds it)
 brightnessctl playerctl pamixer wiremix libnotify libqalculate
 
 # Qt/Wayland integration and the file manager bound to SUPER+E
@@ -25,7 +26,7 @@ bluez bluez-utils
 pipewire pipewire-pulse wireplumber
 
 # Fonts used by the configs:
-#   ghostty/hyprlock   -> "CaskaydiaMono Nerd Font"  (ttf-cascadia-mono-nerd)
+#   ghostty/hyprlock/mako -> "CaskaydiaMono Nerd Font" (ttf-cascadia-mono-nerd)
 #   waybar             -> "JetbrainsMono Nerd Font"  (ttf-jetbrains-mono-nerd)
 #   waybar icons       -> Font Awesome               (otf-font-awesome)
 ttf-cascadia-mono-nerd ttf-jetbrains-mono-nerd otf-font-awesome

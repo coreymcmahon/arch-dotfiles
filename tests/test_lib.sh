@@ -89,6 +89,16 @@ test_services_stage_adds_docker_group_once() {
   assert_not_contains "$(cat "$STUB_LOG")" "usermod"
 }
 
+test_services_stage_adds_video_group_for_swayosd() {
+  export STUB_INSTALLED="swayosd" STUB_GROUPS="wheel"
+  capture bash "$REPO_DIR/stages/60-services.sh"
+  assert_eq 0 "$RC" "$OUT"
+  assert_contains "$(cat "$STUB_LOG")" "sudo usermod -aG video $USER"
+  : >"$STUB_LOG"; export STUB_GROUPS="wheel video"
+  capture bash "$REPO_DIR/stages/60-services.sh"
+  assert_not_contains "$(cat "$STUB_LOG")" "usermod"
+}
+
 test_development_stage_skips_installed_runtimes() {
   export STUB_INSTALLED="docker mise" STUB_MISE_INSTALLED="node php go"
   capture bash "$REPO_DIR/stages/40-development.sh"

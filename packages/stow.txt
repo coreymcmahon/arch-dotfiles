@@ -3,6 +3,7 @@
 bash
 ghostty
 hypr
+mako
 nvim
 waybar
 # Opt-in alternatives: ./install.sh --stage dotfiles alacritty   (or kitty)

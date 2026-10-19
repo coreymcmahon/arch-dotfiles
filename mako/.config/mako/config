@@ -1,0 +1,18 @@
+# mako notification daemon (D-Bus activated; no exec-once needed).
+# Colours: Catppuccin Macchiato, font matches ghostty/hyprlock.
+font=CaskaydiaMono Nerd Font 10
+background-color=#24273a
+text-color=#cad3f5
+border-color=#8aadf4
+progress-color=over #363a4f
+border-size=1
+border-radius=0
+padding=10
+margin=10
+width=360
+default-timeout=5000
+anchor=top-right
+
+[urgency=high]
+border-color=#ed8796
+default-timeout=0

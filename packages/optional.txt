@@ -4,11 +4,11 @@
 # Alternative terminals (stow the matching group if you switch)
 alacritty kitty
 
-# Qt theme engine referenced by QT_STYLE_OVERRIDE in hyprland.conf
+# Qt theme engine; uncomment "env = QT_STYLE_OVERRIDE,kvantum" in hyprland.conf to use it
 kvantum
 
-# Clean logout/shutdown dialog and plugin manager for Hyprland
-hyprshutdown hyprpm
+# Hyprland plugin manager
+hyprpm
 
 # Compression helper used by docker save/load
 pigz

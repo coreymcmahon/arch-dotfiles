@@ -66,8 +66,8 @@ git -C ~/Code/coreymcmahon/arch-dotfiles remote set-url origin git@github.com:co
 | `desktop`     | `stages/30-desktop.sh`     | Detect GPU vendor and install drivers, then `packages/desktop.txt` (Hyprland stack, Waybar, Mako, fonts, portals) |
 | `development` | `stages/40-development.sh` | Docker, mise, PHP build libraries; `mise use --global node@lts php@latest go@latest` |
 | `dotfiles`    | `stages/50-dotfiles.sh`    | Stow the groups in `packages/stow.txt` into `$HOME`; `xdg-user-dirs-update` |
-| `services`    | `stages/60-services.sh`    | Enable `docker.service`, `bluetooth.service`, PipeWire user units; add you to the `docker` group |
-| `optional`    | `stages/90-optional.sh`    | Not run by default: `packages/optional.txt` (alacritty, kitty, kvantum, hyprshutdown, hyprpm, pigz) |
+| `services`    | `stages/60-services.sh`    | Enable `docker.service`, `bluetooth.service`, PipeWire user units; add you to the `docker` and `video` (backlight) groups |
+| `optional`    | `stages/90-optional.sh`    | Not run by default: `packages/optional.txt` (alacritty, kitty, kvantum, hyprpm, pigz) |
 
 Every stage is independently runnable (`stages/30-desktop.sh` works directly)
 and idempotent: packages already present are skipped (`pacman -T` handles
@@ -109,7 +109,7 @@ was merged into `mesa`; `nvidia-dkms` is gone in favour of `nvidia-open-dkms`.
 ## Dotfiles
 
 Each top-level directory (`alacritty`, `bash`, `ghostty`, `hypr`, `kitty`,
-`nvim`, `waybar`) is a Stow package mirroring `$HOME`. The default
+`mako`, `nvim`, `waybar`) is a Stow package mirroring `$HOME`. The default
 set is in `packages/stow.txt`; `alacritty` and `kitty` are opt-in alternatives
 to Ghostty.
 
@@ -231,5 +231,5 @@ lib/stow.sh       conflict detection, backups, (re)stow
 stages/*.sh       one script per stage, runnable on their own
 packages/*.txt    declarative package and stow inventories
 tests/            test suite and command stubs
-<group>/          Stow packages (alacritty, bash, ghostty, hypr, kitty, nvim, waybar)
+<group>/          Stow packages (alacritty, bash, ghostty, hypr, kitty, mako, nvim, waybar)
 ```

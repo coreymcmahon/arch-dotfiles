@@ -1,4 +1,4 @@
-@import "mocha.css"; 
+@import "macchiato.css";
 
 * {
     font-family: "JetbrainsMono Nerd Font";
@@ -124,4 +124,14 @@ button:hover {
     border-radius: 15px;
     padding-left: 6px;
     padding-right: 6px;
+}
+
+#battery.warning {
+    color: @peach;
+    border-bottom: 2px solid @peach;
+}
+
+#battery.critical {
+    color: @red;
+    border-bottom: 2px solid @red;
 }

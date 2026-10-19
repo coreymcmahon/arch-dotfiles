@@ -30,6 +30,18 @@ else
   info "docker not installed; skipping (run the development stage first)."
 fi
 
+# --- Backlight access (swayosd brightness keys) --------------------------------
+# swayosd ships udev rules that let members of "video" write /sys/class/backlight.
+if pkg_installed swayosd; then
+  log "Backlight (video group)"
+  if user_in_group "$USER" video; then
+    info "$USER is already in the video group."
+  else
+    run_sudo usermod -aG video "$USER"
+    warn "Added $USER to the video group; log out and back in for it to take effect."
+  fi
+fi
+
 # --- Bluetooth (Waybar module, blueberry) --------------------------------------
 if pkg_installed bluez; then
   log "Bluetooth"
