@@ -29,8 +29,6 @@ udiskie
 # gcr-4 (dependency) provides the gcr-ssh-agent user socket used by .bashrc.
 gnome-keyring seahorse
 
-# GTK theme/dark-mode GUI; the gtk stow group and hyprland.conf set the defaults
-nwg-look
 
 # Bluetooth stack (Waybar bluetooth module; blueberry GUI comes from the AUR)
 bluez bluez-utils
@@ -42,8 +40,8 @@ pipewire pipewire-pulse wireplumber
 # Fonts used by the configs:
 #   ghostty/hyprlock/mako -> "CaskaydiaMono Nerd Font" (ttf-cascadia-mono-nerd)
 #   waybar             -> "JetbrainsMono Nerd Font"  (ttf-jetbrains-mono-nerd)
-#   waybar icons       -> Font Awesome               (otf-font-awesome)
-ttf-cascadia-mono-nerd ttf-jetbrains-mono-nerd otf-font-awesome
+#   waybar icons are Nerd Font glyphs (Material Design / Font Awesome ranges)
+ttf-cascadia-mono-nerd ttf-jetbrains-mono-nerd
 noto-fonts noto-fonts-emoji noto-fonts-cjk noto-fonts-extra
 
 # Desktop integration

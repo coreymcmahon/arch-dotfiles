@@ -7,6 +7,5 @@ hypr
 mako
 nvim
 waybar
-# Opt-in alternatives: ./install.sh --stage dotfiles alacritty   (or kitty)
+# Opt-in alternative: ./install.sh --stage dotfiles alacritty
 # alacritty
-# kitty

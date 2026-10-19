@@ -67,7 +67,7 @@ git -C ~/Code/coreymcmahon/arch-dotfiles remote set-url origin git@github.com:co
 | `development` | `stages/40-development.sh` | Docker, mise, PHP build libraries; `mise use --global node@lts php@latest go@latest` |
 | `dotfiles`    | `stages/50-dotfiles.sh`    | Stow the groups in `packages/stow.txt` into `$HOME`; `xdg-user-dirs-update` |
 | `services`    | `stages/60-services.sh`    | Install `etc/greetd/config.toml` and enable `greetd` (tty1 login, starts on next boot); unlock gnome-keyring via PAM and enable the gcr SSH agent; enable `docker.service`, `bluetooth.service`, PipeWire user units; add you to the `docker` and `video` (backlight) groups |
-| `optional`    | `stages/90-optional.sh`    | Not run by default: `packages/optional.txt` (alacritty, kitty, kvantum, hyprpm, pigz) |
+| `optional`    | `stages/90-optional.sh`    | Not run by default: `packages/optional.txt` (alacritty, kvantum, hyprpm, pigz) |
 
 Every stage is independently runnable (`stages/30-desktop.sh` works directly)
 and idempotent: packages already present are skipped (`pacman -T` handles
@@ -90,11 +90,11 @@ Declarative lists under `packages/`, one or more names per line, `#` comments:
 | `gpu-{amd,intel,nvidia,virtual}.txt` | desktop | Official: drivers chosen by PCI vendor detection |
 | `aur.txt`           | aur           | AUR: `walker-bin`, `elephant-bin` and providers, `blueberry`, `ttf-ia-writer`, Catppuccin Macchiato GTK theme and cursors |
 | `development.txt`   | development   | Official: Docker, mise, PHP build dependencies, shellcheck/shfmt |
-| `optional.txt`      | optional      | Official extras (alacritty, kitty, kvantum, ...) |
+| `optional.txt`      | optional      | Official extras (alacritty, kvantum, ...) |
 | `stow.txt`          | dotfiles      | Stow groups to link, in order |
 
 All names were verified against the official repos and AUR on 2026-10-19.
-Notable mappings: `ttf-font-awesome` is now `otf-font-awesome`; `hyprshot`
+Notable mappings: `hyprshot`
 moved from the AUR to `extra`; `hyprland-qtutils` was replaced by
 `hyprland-guiutils` (a hard dependency of `hyprland`); `libva-mesa-driver`
 was merged into `mesa`; `nvidia-dkms` is gone in favour of `nvidia-open-dkms`.
@@ -108,10 +108,9 @@ was merged into `mesa`; `nvidia-dkms` is gone in favour of `nvidia-open-dkms`.
 
 ## Dotfiles
 
-Each top-level directory (`alacritty`, `bash`, `ghostty`, `hypr`, `kitty`,
-`gtk`, `mako`, `nvim`, `waybar`) is a Stow package mirroring `$HOME`. The default
-set is in `packages/stow.txt`; `alacritty` and `kitty` are opt-in alternatives
-to Ghostty.
+Each top-level directory (`alacritty`, `bash`, `ghostty`, `gtk`, `hypr`,
+`mako`, `nvim`, `waybar`) is a Stow package mirroring `$HOME`. The default
+set is in `packages/stow.txt`; `alacritty` is an opt-in alternative to Ghostty.
 
 ```bash
 ./install.sh --stage dotfiles              # everything in packages/stow.txt
@@ -232,5 +231,5 @@ stages/*.sh       one script per stage, runnable on their own
 packages/*.txt    declarative package and stow inventories
 etc/              system files installed by the services stage (greetd)
 tests/            test suite and command stubs
-<group>/          Stow packages (alacritty, bash, ghostty, gtk, hypr, kitty, mako, nvim, waybar)
+<group>/          Stow packages (alacritty, bash, ghostty, gtk, hypr, mako, nvim, waybar)
 ```

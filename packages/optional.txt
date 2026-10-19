@@ -1,8 +1,8 @@
 # Optional official packages. Not part of the default run:
 #   ./install.sh --stage optional
 
-# Alternative terminals (stow the matching group if you switch)
-alacritty kitty
+# Alternative terminal (stow the alacritty group if you switch)
+alacritty
 
 # Qt theme engine; uncomment "env = QT_STYLE_OVERRIDE,kvantum" in hyprland.conf to use it
 kvantum
