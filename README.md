@@ -130,8 +130,7 @@ Existing files are never overwritten:
 
 ### Secrets
 
-Anything sensitive lives outside the repo, mirroring `.zshrc.secrets` /
-`.zshenv.secrets` in macos-dotfiles:
+Anything sensitive lives outside the repo in two git-ignored files:
 
 | File                      | Sourced by           | Put here |
 |---------------------------|----------------------|----------|
@@ -143,15 +142,16 @@ them again. `.gitignore` excludes `*.secrets*`, so they cannot be committed.
 
 ### Shell aliases
 
-`bash/.bashrc` carries the same aliases as the macOS `.zshrc` (`g`, `ga`,
-`gd`, `gdc`, `gc`, `gch`, `gs`, `gb`, `pull`, `push`, `pullc`, `pushc`, `co`,
-`s`, `art`, `ni`, `nrd`, `vi`, `vim`, `q`, `ss`) plus `killdns`, which flushes
-systemd-resolved if it is in use. `bash/.inputrc` adds the Alt+Left/Right word
+`bash/.bashrc` defines the shell shortcuts: git (`g`, `ga`, `gd`, `gdc`, `gc`,
+`gch`, `gs`, `gb`, `pull`, `push`, `pullc`, `pushc`, `co`), Laravel (`s`,
+`art`), npm (`ni`, `nrd`), Neovim (`vi`, `vim`), `q`, `ss` (ssh with
+`TERM=xterm-256color` for hosts without the Ghostty terminfo) and `killdns`,
+which flushes systemd-resolved if it is in use. `bash/.inputrc` adds the Alt+Left/Right word
 movement bindings. `~/.local/bin` is on `PATH` via `bash/.bash_profile`.
 
 ### Applications
 
-Parity with the macOS Brewfile: Obsidian, Spotify (`spotify-launcher`
+Desktop applications: Obsidian, Spotify (`spotify-launcher`
 downloads the client; `spotify/` passes the Wayland flags), Tailscale
 (`tailscaled.service` is enabled by the services stage; join with
 `sudo tailscale up`), 1Password (started in the tray by hyprland.conf),
@@ -161,19 +161,17 @@ Slack, TablePlus and Claude Code (`claude`, used by
 
 ### Brave
 
-`brave-bin` is installed by the aur stage and bound to SUPER+B. The macOS
-`setup-brave.sh` is split into its Linux equivalents:
+`brave-bin` is installed by the aur stage and bound to SUPER+B. Its
+configuration has three parts:
 
 - `etc/brave/policies/managed/policies.json` (installed by the services stage):
   Rewards, Wallet, VPN, Leo AI and News off; third-party cookies blocked;
   telemetry (metrics, URL-keyed data, P3A, stats ping), search suggestions and
   cloud spell-check off; background mode and the default-browser nag off;
   incognito and devtools kept. Every key was checked against Brave's and
-  Chromium's policy templates: the macOS plist's `EnableDoNotTrack`,
-  `TabHoverCardImagesSettings` and `SuppressFirstRunDefaultBrowserPrompt` are
-  not real policies and `DownloadBubbleEnabled` is deprecated, so they were
-  dropped (Do Not Track is set per profile by `brave-setup` instead). Check
-  `brave://policy`; unknown names show up there as errors.
+  Chromium's policy templates (checked 2026-10-19). Do Not Track has no
+  policy, so `brave-setup` sets it per profile. Check `brave://policy`;
+  unknown names show up there as errors.
 - `brave/.config/brave-flags.conf`: native Wayland, passwords in
   gnome-keyring, two-finger swipe navigation.
 - `scripts/.local/bin/brave-setup`: patches every profile's `Preferences`

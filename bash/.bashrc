@@ -1,6 +1,5 @@
 ###
 # Interactive-shell settings. Login-shell exports live in .bash_profile.
-# Mirrors zsh/.zshrc in macos-dotfiles so aliases stay in parity.
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return

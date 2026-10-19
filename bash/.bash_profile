@@ -1,6 +1,6 @@
 ###
 # Login-shell environment (read once at login, inherited by the Hyprland
-# session and everything it starts). Mirrors zsh/.zshenv in macos-dotfiles.
+# session and everything it starts).
 
 ###
 # PATH

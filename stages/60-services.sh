@@ -60,8 +60,8 @@ if pkg_installed gnome-keyring; then
 fi
 
 # --- Brave managed policies ----------------------------------------------------
-# Site-wide Brave settings (bloat off, privacy, telemetry) ported from the macOS
-# plist. Per-profile preferences are applied by the stowed `brave-setup` script.
+# Site-wide Brave settings (bloat off, privacy, telemetry). Per-profile
+# preferences are applied by the stowed `brave-setup` script.
 BRAVE_POLICY_FILE=${BRAVE_POLICY_FILE:-/etc/brave/policies/managed/policies.json}
 if pkg_installed brave-bin; then
   log "Brave policies"

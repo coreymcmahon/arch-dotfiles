@@ -47,7 +47,7 @@ noto-fonts noto-fonts-emoji noto-fonts-cjk noto-fonts-extra
 # Desktop integration
 xdg-utils xdg-user-dirs
 
-# Applications (parity with the macOS Brewfile; the rest come from the AUR)
+# Applications (official repos; the rest come from the AUR)
 # tailscale: tailscaled.service is enabled by the services stage, then run "sudo tailscale up"
 # spotify-launcher: downloads the Spotify client; flags in the spotify stow group
 obsidian spotify-launcher tailscale

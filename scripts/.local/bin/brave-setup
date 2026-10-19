@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Apply the per-profile Brave preferences from macos-dotfiles/bin/setup-brave.sh
-# to every Brave profile on this machine. Site-wide policies (bloat, privacy,
+# Apply consistent per-profile Brave preferences (toolbar/new-tab cleanup,
+# devtools, privacy, performance) to every Brave profile on this machine. Site-wide policies (bloat, privacy,
 # telemetry) are installed separately to /etc/brave/policies/managed by the
 # services stage; this script only patches the per-user "Preferences" files,
 # which Brave rewrites on exit, so it must run while Brave is closed.
