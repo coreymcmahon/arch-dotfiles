@@ -25,7 +25,7 @@ bluez bluez-utils
 pipewire pipewire-pulse wireplumber
 
 # Fonts used by the configs:
-#   alacritty/hyprlock -> "CaskaydiaMono Nerd Font"  (ttf-cascadia-mono-nerd)
+#   ghostty/hyprlock   -> "CaskaydiaMono Nerd Font"  (ttf-cascadia-mono-nerd)
 #   waybar             -> "JetbrainsMono Nerd Font"  (ttf-jetbrains-mono-nerd)
 #   waybar icons       -> Font Awesome               (otf-font-awesome)
 ttf-cascadia-mono-nerd ttf-jetbrains-mono-nerd otf-font-awesome

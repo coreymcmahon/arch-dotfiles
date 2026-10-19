@@ -1,0 +1,22 @@
+# Ghostty configuration (migrated from alacritty/alacritty.toml).
+# Reference: https://ghostty.org/docs/config/reference
+# Reload with ctrl+shift+, or restart Ghostty.
+
+# Font: same face as hyprlock; styles (bold/italic) are picked automatically.
+font-family = CaskaydiaMono Nerd Font
+font-size = 10
+
+# Window
+window-padding-x = 14
+window-padding-y = 14
+window-decoration = none
+background-opacity = 0.98
+
+# Catppuccin Macchiato, matching the old alacritty theme (built-in theme).
+theme = Catppuccin Macchiato
+
+# Keybindings
+keybind = f11=toggle_fullscreen
+
+# TERM is xterm-ghostty (terminfo from the ghostty-terminfo package). If a
+# remote host lacks it, run: infocmp -x xterm-ghostty | ssh HOST -- tic -x -

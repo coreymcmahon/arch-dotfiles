@@ -1,9 +1,10 @@
 # Stow groups linked into $HOME by the "dotfiles" stage, in order.
 # Each name is a top-level directory in this repository.
-alacritty
 bash
+ghostty
 hypr
 nvim
 waybar
-zellij
-# kitty   # only if you use Kitty instead of Alacritty: ./install.sh --stage dotfiles kitty
+# Opt-in alternatives: ./install.sh --stage dotfiles alacritty   (or kitty)
+# alacritty
+# kitty

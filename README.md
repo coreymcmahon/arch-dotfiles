@@ -1,7 +1,7 @@
 # arch-dotfiles
 
 Bootstrap and configuration for my Arch Linux workstation: Hyprland, Waybar,
-Walker, Alacritty, Zellij, Neovim, Docker and mise, with configs managed by
+Walker, Ghostty, Neovim, Docker and mise, with configs managed by
 GNU Stow.
 
 ## Assumed base system
@@ -61,13 +61,13 @@ git -C ~/Code/coreymcmahon/arch-dotfiles remote set-url origin git@github.com:co
 
 | Stage         | Script                     | What it does |
 |---------------|----------------------------|--------------|
-| `system`      | `stages/10-system.sh`      | `pacman -Syu` full upgrade, then `packages/system.txt` (CLI baseline, Alacritty, Zellij, Neovim, Stow) |
+| `system`      | `stages/10-system.sh`      | `pacman -Syu` full upgrade, then `packages/system.txt` (CLI baseline, Ghostty, Neovim, Stow) |
 | `aur`         | `stages/20-aur.sh`         | Build `yay-bin` as your user, then `packages/aur.txt` (Walker + elephant providers, blueberry, iA Writer font) |
 | `desktop`     | `stages/30-desktop.sh`     | Detect GPU vendor and install drivers, then `packages/desktop.txt` (Hyprland stack, Waybar, Mako, fonts, portals) |
 | `development` | `stages/40-development.sh` | Docker, mise, PHP build libraries; `mise use --global node@lts php@latest go@latest` |
 | `dotfiles`    | `stages/50-dotfiles.sh`    | Stow the groups in `packages/stow.txt` into `$HOME`; `xdg-user-dirs-update` |
 | `services`    | `stages/60-services.sh`    | Enable `docker.service`, `bluetooth.service`, PipeWire user units; add you to the `docker` group |
-| `optional`    | `stages/90-optional.sh`    | Not run by default: `packages/optional.txt` (kitty, kvantum, hyprshutdown, hyprpm, pigz) |
+| `optional`    | `stages/90-optional.sh`    | Not run by default: `packages/optional.txt` (alacritty, kitty, kvantum, hyprshutdown, hyprpm, pigz) |
 
 Every stage is independently runnable (`stages/30-desktop.sh` works directly)
 and idempotent: packages already present are skipped (`pacman -T` handles
@@ -85,12 +85,12 @@ Declarative lists under `packages/`, one or more names per line, `#` comments:
 
 | File                | Installed by  | Contents |
 |---------------------|---------------|----------|
-| `system.txt`        | system        | Official: shell tools, editors, Alacritty, Zellij, Stow, Neovim helpers |
+| `system.txt`        | system        | Official: shell tools, editors, Ghostty, Stow, Neovim helpers |
 | `desktop.txt`       | desktop       | Official: Hyprland ecosystem, Waybar, Mako, fonts, Qt/Wayland, Dolphin, Bluetooth, PipeWire |
 | `gpu-{amd,intel,nvidia,virtual}.txt` | desktop | Official: drivers chosen by PCI vendor detection |
 | `aur.txt`           | aur           | AUR: `walker-bin`, `elephant-bin` and providers, `blueberry`, `ttf-ia-writer` |
 | `development.txt`   | development   | Official: Docker, mise, PHP build dependencies, shellcheck/shfmt |
-| `optional.txt`      | optional      | Official extras |
+| `optional.txt`      | optional      | Official extras (alacritty, kitty, kvantum, ...) |
 | `stow.txt`          | dotfiles      | Stow groups to link, in order |
 
 All names were verified against the official repos and AUR on 2026-10-19.
@@ -108,15 +108,16 @@ was merged into `mesa`; `nvidia-dkms` is gone in favour of `nvidia-open-dkms`.
 
 ## Dotfiles
 
-Each top-level directory (`alacritty`, `bash`, `hypr`, `kitty`, `nvim`,
-`waybar`, `zellij`) is a Stow package mirroring `$HOME`. The default set is in
-`packages/stow.txt`; `kitty` is opt-in.
+Each top-level directory (`alacritty`, `bash`, `ghostty`, `hypr`, `kitty`,
+`nvim`, `waybar`) is a Stow package mirroring `$HOME`. The default
+set is in `packages/stow.txt`; `alacritty` and `kitty` are opt-in alternatives
+to Ghostty.
 
 ```bash
 ./install.sh --stage dotfiles              # everything in packages/stow.txt
 ./install.sh --stage dotfiles nvim         # one group
-./install.sh --stage dotfiles kitty        # opt-in group
-stow -D --target ~ kitty                   # unlink a group (run from the repo)
+./install.sh --stage dotfiles alacritty    # opt-in group
+stow -D --target ~ alacritty               # unlink a group (run from the repo)
 ```
 
 Existing files are never overwritten:
@@ -230,5 +231,5 @@ lib/stow.sh       conflict detection, backups, (re)stow
 stages/*.sh       one script per stage, runnable on their own
 packages/*.txt    declarative package and stow inventories
 tests/            test suite and command stubs
-<group>/          Stow packages (alacritty, bash, hypr, kitty, nvim, waybar, zellij)
+<group>/          Stow packages (alacritty, bash, ghostty, hypr, kitty, nvim, waybar)
 ```
