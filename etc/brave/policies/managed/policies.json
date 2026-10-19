@@ -1,14 +1,11 @@
 {
-  "__comment": "Installed to /etc/brave/policies/managed/policies.json by the services stage. Port of macos-dotfiles/bin/setup-brave.sh (com.brave.Browser.plist). Verify at brave://policy.",
-
   "BraveRewardsDisabled": true,
   "BraveWalletDisabled": true,
   "BraveVPNDisabled": true,
   "BraveAIChatEnabled": false,
-  "BraveNewsEnabled": false,
+  "BraveNewsDisabled": true,
 
   "BlockThirdPartyCookies": true,
-  "EnableDoNotTrack": true,
   "SearchSuggestEnabled": false,
   "NetworkPredictionOptions": 2,
 
@@ -16,14 +13,14 @@
   "MetricsReportingEnabled": false,
   "UrlKeyedAnonymizedDataCollectionEnabled": false,
   "SpellCheckServiceEnabled": false,
+  "BraveP3AEnabled": false,
+  "BraveStatsPingEnabled": false,
 
   "RemoteAccessHostFirewallTraversal": false,
 
   "BackgroundModeEnabled": false,
-  "TabHoverCardImagesSettings": 0,
 
-  "SuppressFirstRunDefaultBrowserPrompt": true,
-  "DownloadBubbleEnabled": false,
+  "DefaultBrowserSettingEnabled": false,
   "IncognitoModeAvailability": 0,
   "DeveloperToolsAvailability": 1
 }

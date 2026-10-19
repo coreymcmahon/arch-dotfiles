@@ -136,6 +136,13 @@ test_services_stage_installs_brave_policies_once() {
   assert_not_contains "$(cat "$STUB_LOG")" "install"
 }
 
+test_services_stage_enables_tailscaled() {
+  export STUB_INSTALLED="tailscale"
+  capture bash "$REPO_DIR/stages/60-services.sh"
+  assert_eq 0 "$RC" "$OUT"
+  assert_contains "$(cat "$STUB_LOG")" "sudo systemctl enable --now tailscaled.service"
+}
+
 test_development_stage_skips_installed_runtimes() {
   export STUB_INSTALLED="docker mise" STUB_MISE_INSTALLED="node php go"
   capture bash "$REPO_DIR/stages/40-development.sh"

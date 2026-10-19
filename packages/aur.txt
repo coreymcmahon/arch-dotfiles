@@ -22,6 +22,10 @@ walker-bin
 # Web browser (binary release maintained by Brave); policies in etc/brave, flags in brave/
 brave-bin
 
+# Applications (parity with the macOS Brewfile). 1password is maintained by 1Password;
+# claude-code provides the "claude" CLI used by scripts/.local/bin/aicommit
+1password slack-desktop tableplus claude-code
+
 # Bluetooth GUI used by the Waybar bluetooth module (blueman is the official alternative)
 blueberry
 

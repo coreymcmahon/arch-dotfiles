@@ -64,6 +64,7 @@ patch_profile() {
     .devtools.preferences.cssSourceMapsEnabled = "true" |
 
     # === PRIVACY EXTRAS ===
+    .enable_do_not_track = true |
     .autofill.credit_card_enabled = false |
     .autofill.profile_enabled = false |
     .webrtc.ip_handling_policy = "default_public_interface_only" |

@@ -70,7 +70,7 @@ test_configs_reference_installed_tools() {
   # with a listed package: nmtui->networkmanager, wpctl->wireplumber, hyprctl->hyprland).
   local all tool
   all=$(read_package_list "${official_lists[@]}" "$aur_list")
-  for tool in ghostty dolphin walker waybar hypridle hyprpaper hyprlock hyprsunset hyprshot hyprpicker hyprshutdown swayosd mako greetd udiskie gnome-keyring brave brightnessctl playerctl btop blueberry wiremix pamixer; do
+  for tool in ghostty dolphin walker waybar hypridle hyprpaper hyprlock hyprsunset hyprshot hyprpicker hyprshutdown swayosd mako greetd udiskie gnome-keyring brave tmux claude-code 1password tailscale spotify-launcher obsidian brightnessctl playerctl btop blueberry wiremix pamixer; do
     assert_contains $'\n'"$all"$'\n' $'\n'"$tool" "config references $tool"
   done
 }

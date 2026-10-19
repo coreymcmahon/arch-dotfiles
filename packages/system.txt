@@ -19,8 +19,8 @@ unzip zip tar
 # Monitoring
 htop btop
 
-# Terminal, dotfile manager
-ghostty stow
+# Terminal, multiplexer, dotfile manager
+ghostty tmux stow
 
 # Neovim helpers: telescope (ripgrep, fd), mason downloads (unzip above), clipboard
 ripgrep fd fzf jq wl-clipboard

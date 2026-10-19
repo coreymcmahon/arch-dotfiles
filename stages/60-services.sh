@@ -99,6 +99,13 @@ if pkg_installed swayosd; then
   fi
 fi
 
+# --- Tailscale -----------------------------------------------------------------
+if pkg_installed tailscale; then
+  log "Tailscale"
+  enable_system_service tailscaled.service
+  info "Join the tailnet with: sudo tailscale up"
+fi
+
 # --- Bluetooth (Waybar module, blueberry) --------------------------------------
 if pkg_installed bluez; then
   log "Bluetooth"

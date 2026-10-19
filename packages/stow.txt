@@ -8,6 +8,8 @@ hypr
 mako
 nvim
 scripts
+spotify
+tmux
 waybar
 # Opt-in alternative: ./install.sh --stage dotfiles alacritty
 # alacritty

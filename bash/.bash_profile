@@ -7,6 +7,10 @@
 export PATH="$HOME/.local/bin:$PATH"
 
 ###
+# Editor (aicommit, git, visudo)
+export EDITOR=nvim VISUAL=nvim
+
+###
 # Secrets
 # - Add export statements to ~/.bash_profile.secrets (e.g. NPM_TOKEN).
 #   The file is git-ignored and created with mode 600 by the dotfiles stage.
