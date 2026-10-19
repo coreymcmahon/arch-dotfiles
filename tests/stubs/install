@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Minimal GNU-install emulation for tests (macOS install lacks -D): install [-D] [-m MODE] SRC DST
+echo "install $*" >>"${STUB_LOG:-/dev/null}"
+mode=644
+while [[ $# -gt 2 ]]; do
+  case "$1" in
+    -D) ;;
+    -m) mode=$2; shift ;;
+    -D?*) mode=${1#-Dm} ;;
+    -m?*) mode=${1#-m} ;;
+    *) echo "install stub: unsupported option $1" >&2; exit 2 ;;
+  esac
+  shift
+done
+mkdir -p -- "$(dirname -- "$2")" && cp -- "$1" "$2" && chmod "$mode" "$2"

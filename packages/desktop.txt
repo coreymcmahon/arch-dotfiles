@@ -1,6 +1,9 @@
 # Hyprland desktop (official repos). Installed by the "desktop" stage.
 # GPU drivers are selected separately from packages/gpu-*.txt.
 
+# Login greeter on tty1 (configured by the services stage from etc/greetd/config.toml)
+greetd greetd-tuigreet
+
 # Compositor and Hypr ecosystem (hyprshutdown is bound to SUPER+M)
 hyprland hyprpaper hypridle hyprlock hyprpicker hyprshot hyprsunset hyprshutdown
 xdg-desktop-portal-hyprland xdg-desktop-portal-gtk
@@ -15,8 +18,19 @@ waybar mako swayosd
 # (swayosd brightness control needs the user in the "video" group; the services stage adds it)
 brightnessctl playerctl pamixer wiremix libnotify libqalculate
 
-# Qt/Wayland integration and the file manager bound to SUPER+E
-qt5-wayland qt6-wayland dolphin
+# Qt/Wayland integration and the file manager bound to SUPER+E. Outside Plasma,
+# dolphin needs kde-cli-tools for "Open With" and the thumbnailers for previews.
+qt5-wayland qt6-wayland dolphin kde-cli-tools kdegraphics-thumbnailers ffmpegthumbs ark
+
+# Removable-drive auto-mounting (udiskie is started from hyprland.conf)
+udiskie
+
+# Secret storage for browsers/git/VS Code; unlocked at login via PAM (services stage).
+# gcr-4 (dependency) provides the gcr-ssh-agent user socket used by .bashrc.
+gnome-keyring seahorse
+
+# GTK theme/dark-mode GUI; the gtk stow group and hyprland.conf set the defaults
+nwg-look
 
 # Bluetooth stack (Waybar bluetooth module; blueberry GUI comes from the AUR)
 bluez bluez-utils

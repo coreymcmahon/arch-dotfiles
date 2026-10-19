@@ -63,10 +63,10 @@ git -C ~/Code/coreymcmahon/arch-dotfiles remote set-url origin git@github.com:co
 |---------------|----------------------------|--------------|
 | `system`      | `stages/10-system.sh`      | `pacman -Syu` full upgrade, then `packages/system.txt` (CLI baseline, Ghostty, Neovim, Stow) |
 | `aur`         | `stages/20-aur.sh`         | Build `yay-bin` as your user, then `packages/aur.txt` (Walker + elephant providers, blueberry, iA Writer font) |
-| `desktop`     | `stages/30-desktop.sh`     | Detect GPU vendor and install drivers, then `packages/desktop.txt` (Hyprland stack, Waybar, Mako, fonts, portals) |
+| `desktop`     | `stages/30-desktop.sh`     | Detect GPU vendor and install drivers, then `packages/desktop.txt` (greetd + tuigreet, Hyprland stack, Waybar, Mako, Dolphin extras, keyring, udiskie, fonts, portals) |
 | `development` | `stages/40-development.sh` | Docker, mise, PHP build libraries; `mise use --global node@lts php@latest go@latest` |
 | `dotfiles`    | `stages/50-dotfiles.sh`    | Stow the groups in `packages/stow.txt` into `$HOME`; `xdg-user-dirs-update` |
-| `services`    | `stages/60-services.sh`    | Enable `docker.service`, `bluetooth.service`, PipeWire user units; add you to the `docker` and `video` (backlight) groups |
+| `services`    | `stages/60-services.sh`    | Install `etc/greetd/config.toml` and enable `greetd` (tty1 login, starts on next boot); unlock gnome-keyring via PAM and enable the gcr SSH agent; enable `docker.service`, `bluetooth.service`, PipeWire user units; add you to the `docker` and `video` (backlight) groups |
 | `optional`    | `stages/90-optional.sh`    | Not run by default: `packages/optional.txt` (alacritty, kitty, kvantum, hyprpm, pigz) |
 
 Every stage is independently runnable (`stages/30-desktop.sh` works directly)
@@ -88,7 +88,7 @@ Declarative lists under `packages/`, one or more names per line, `#` comments:
 | `system.txt`        | system        | Official: shell tools, editors, Ghostty, Stow, Neovim helpers |
 | `desktop.txt`       | desktop       | Official: Hyprland ecosystem, Waybar, Mako, fonts, Qt/Wayland, Dolphin, Bluetooth, PipeWire |
 | `gpu-{amd,intel,nvidia,virtual}.txt` | desktop | Official: drivers chosen by PCI vendor detection |
-| `aur.txt`           | aur           | AUR: `walker-bin`, `elephant-bin` and providers, `blueberry`, `ttf-ia-writer` |
+| `aur.txt`           | aur           | AUR: `walker-bin`, `elephant-bin` and providers, `blueberry`, `ttf-ia-writer`, Catppuccin Macchiato GTK theme and cursors |
 | `development.txt`   | development   | Official: Docker, mise, PHP build dependencies, shellcheck/shfmt |
 | `optional.txt`      | optional      | Official extras (alacritty, kitty, kvantum, ...) |
 | `stow.txt`          | dotfiles      | Stow groups to link, in order |
@@ -109,7 +109,7 @@ was merged into `mesa`; `nvidia-dkms` is gone in favour of `nvidia-open-dkms`.
 ## Dotfiles
 
 Each top-level directory (`alacritty`, `bash`, `ghostty`, `hypr`, `kitty`,
-`mako`, `nvim`, `waybar`) is a Stow package mirroring `$HOME`. The default
+`gtk`, `mako`, `nvim`, `waybar`) is a Stow package mirroring `$HOME`. The default
 set is in `packages/stow.txt`; `alacritty` and `kitty` are opt-in alternatives
 to Ghostty.
 
@@ -230,6 +230,7 @@ lib/common.sh     logging, dry-run wrappers, pacman/yay/systemd helpers, GPU det
 lib/stow.sh       conflict detection, backups, (re)stow
 stages/*.sh       one script per stage, runnable on their own
 packages/*.txt    declarative package and stow inventories
+etc/              system files installed by the services stage (greetd)
 tests/            test suite and command stubs
-<group>/          Stow packages (alacritty, bash, ghostty, hypr, kitty, mako, nvim, waybar)
+<group>/          Stow packages (alacritty, bash, ghostty, gtk, hypr, kitty, mako, nvim, waybar)
 ```

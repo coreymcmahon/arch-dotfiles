@@ -10,6 +10,12 @@ alias grep='grep --color=auto'
 PS1='[\u@\h \W]\$ '
 
 ###
+# SSH agent provided by gnome-keyring/gcr (gcr-ssh-agent.socket, enabled by the services stage)
+if [ -z "${SSH_AUTH_SOCK:-}" ] && [ -S "${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/gcr/ssh" ]; then
+    export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/gcr/ssh"
+fi
+
+###
 # mise (manages Node.js, PHP and Go; installed by the development stage)
 if command -v mise >/dev/null 2>&1; then
     eval "$(mise activate bash)"

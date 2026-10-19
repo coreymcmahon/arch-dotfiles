@@ -24,3 +24,7 @@ blueberry
 
 # Fonts
 ttf-ia-writer
+
+# Catppuccin Macchiato GTK theme and cursors (names used in gtk/ and hyprland.conf)
+catppuccin-gtk-theme-macchiato
+catppuccin-cursors-macchiato

@@ -99,6 +99,32 @@ test_services_stage_adds_video_group_for_swayosd() {
   assert_not_contains "$(cat "$STUB_LOG")" "usermod"
 }
 
+test_services_stage_configures_greetd_without_starting_it() {
+  export STUB_INSTALLED="greetd" GREETD_CONFIG="$SANDBOX/etc/greetd/config.toml" GREETD_PAM="$SANDBOX/etc/pam.d/greetd"
+  capture bash "$REPO_DIR/stages/60-services.sh"
+  assert_eq 0 "$RC" "$OUT"
+  assert_file "$GREETD_CONFIG"
+  assert_contains "$(cat "$GREETD_CONFIG")" "start-hyprland"
+  assert_contains "$(cat "$STUB_LOG")" "sudo systemctl enable greetd.service"
+  assert_not_contains "$(cat "$STUB_LOG")" "enable --now greetd.service"
+  : >"$STUB_LOG"; export STUB_ENABLED="greetd.service"
+  capture bash "$REPO_DIR/stages/60-services.sh"
+  assert_not_contains "$(cat "$STUB_LOG")" "install"
+  assert_not_contains "$(cat "$STUB_LOG")" "systemctl enable"
+}
+
+test_services_stage_adds_keyring_pam_once() {
+  export STUB_INSTALLED="gnome-keyring" GREETD_CONFIG="$SANDBOX/etc/greetd/config.toml" GREETD_PAM="$SANDBOX/etc/pam.d/greetd"
+  mkdir -p "$SANDBOX/etc/pam.d"
+  printf '#%%PAM-1.0\nauth include system-local-login\n' >"$GREETD_PAM"
+  capture bash "$REPO_DIR/stages/60-services.sh"
+  assert_eq 0 "$RC" "$OUT"
+  assert_eq 1 "$(grep -c 'pam_gnome_keyring.so auto_start' "$GREETD_PAM")"
+  assert_contains "$(cat "$STUB_LOG")" "systemctl --user enable --now gcr-ssh-agent.socket"
+  capture bash "$REPO_DIR/stages/60-services.sh"
+  assert_eq 1 "$(grep -c 'pam_gnome_keyring.so auto_start' "$GREETD_PAM")"
+}
+
 test_development_stage_skips_installed_runtimes() {
   export STUB_INSTALLED="docker mise" STUB_MISE_INSTALLED="node php go"
   capture bash "$REPO_DIR/stages/40-development.sh"

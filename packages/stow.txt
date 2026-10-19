@@ -2,6 +2,7 @@
 # Each name is a top-level directory in this repository.
 bash
 ghostty
+gtk
 hypr
 mako
 nvim

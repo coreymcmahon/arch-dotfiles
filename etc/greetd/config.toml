@@ -1,0 +1,10 @@
+# greetd configuration installed to /etc/greetd/config.toml by the services stage.
+# tuigreet runs on tty1 and launches Hyprland via start-hyprland.
+# If the greeter ever fails, switch to tty2 (Ctrl+Alt+F2) and log in there.
+
+[terminal]
+vt = 1
+
+[default_session]
+command = "tuigreet --time --remember --asterisks --cmd start-hyprland"
+user = "greeter"
