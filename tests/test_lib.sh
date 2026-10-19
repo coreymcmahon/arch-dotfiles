@@ -125,6 +125,17 @@ test_services_stage_adds_keyring_pam_once() {
   assert_eq 1 "$(grep -c 'pam_gnome_keyring.so auto_start' "$GREETD_PAM")"
 }
 
+test_services_stage_installs_brave_policies_once() {
+  export STUB_INSTALLED="brave-bin" BRAVE_POLICY_FILE="$SANDBOX/etc/brave/policies/managed/policies.json"
+  capture bash "$REPO_DIR/stages/60-services.sh"
+  assert_eq 0 "$RC" "$OUT"
+  assert_file "$BRAVE_POLICY_FILE"
+  assert_contains "$(cat "$BRAVE_POLICY_FILE")" '"BraveRewardsDisabled": true'
+  : >"$STUB_LOG"
+  capture bash "$REPO_DIR/stages/60-services.sh"
+  assert_not_contains "$(cat "$STUB_LOG")" "install"
+}
+
 test_development_stage_skips_installed_runtimes() {
   export STUB_INSTALLED="docker mise" STUB_MISE_INSTALLED="node php go"
   capture bash "$REPO_DIR/stages/40-development.sh"

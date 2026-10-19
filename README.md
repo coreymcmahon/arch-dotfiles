@@ -62,11 +62,11 @@ git -C ~/Code/coreymcmahon/arch-dotfiles remote set-url origin git@github.com:co
 | Stage         | Script                     | What it does |
 |---------------|----------------------------|--------------|
 | `system`      | `stages/10-system.sh`      | `pacman -Syu` full upgrade, then `packages/system.txt` (CLI baseline, Ghostty, Neovim, Stow) |
-| `aur`         | `stages/20-aur.sh`         | Build `yay-bin` as your user, then `packages/aur.txt` (Walker + elephant providers, blueberry, iA Writer font) |
+| `aur`         | `stages/20-aur.sh`         | Build `yay-bin` as your user, then `packages/aur.txt` (Walker + elephant providers, Brave, blueberry, iA Writer font, Catppuccin theme) |
 | `desktop`     | `stages/30-desktop.sh`     | Detect GPU vendor and install drivers, then `packages/desktop.txt` (greetd + tuigreet, Hyprland stack, Waybar, Mako, Dolphin extras, keyring, udiskie, fonts, portals) |
 | `development` | `stages/40-development.sh` | Docker, mise, PHP build libraries; `mise use --global node@lts php@latest go@latest` |
-| `dotfiles`    | `stages/50-dotfiles.sh`    | Stow the groups in `packages/stow.txt` into `$HOME`; `xdg-user-dirs-update` |
-| `services`    | `stages/60-services.sh`    | Install `etc/greetd/config.toml` and enable `greetd` (tty1 login, starts on next boot); unlock gnome-keyring via PAM and enable the gcr SSH agent; enable `docker.service`, `bluetooth.service`, PipeWire user units; add you to the `docker` and `video` (backlight) groups |
+| `dotfiles`    | `stages/50-dotfiles.sh`    | Stow the groups in `packages/stow.txt` into `$HOME`; create empty `~/.bashrc.secrets` / `~/.bash_profile.secrets` (mode 600); `xdg-user-dirs-update` |
+| `services`    | `stages/60-services.sh`    | Install `etc/greetd/config.toml` and enable `greetd` (tty1 login, starts on next boot); install Brave managed policies to `/etc/brave/policies/managed`; unlock gnome-keyring via PAM and enable the gcr SSH agent; enable `docker.service`, `bluetooth.service`, PipeWire user units; add you to the `docker` and `video` (backlight) groups |
 | `optional`    | `stages/90-optional.sh`    | Not run by default: `packages/optional.txt` (alacritty, kvantum, hyprpm, pigz) |
 
 Every stage is independently runnable (`stages/30-desktop.sh` works directly)
@@ -88,7 +88,7 @@ Declarative lists under `packages/`, one or more names per line, `#` comments:
 | `system.txt`        | system        | Official: shell tools, editors, Ghostty, Stow, Neovim helpers |
 | `desktop.txt`       | desktop       | Official: Hyprland ecosystem, Waybar, Mako, fonts, Qt/Wayland, Dolphin, Bluetooth, PipeWire |
 | `gpu-{amd,intel,nvidia,virtual}.txt` | desktop | Official: drivers chosen by PCI vendor detection |
-| `aur.txt`           | aur           | AUR: `walker-bin`, `elephant-bin` and providers, `blueberry`, `ttf-ia-writer`, Catppuccin Macchiato GTK theme and cursors |
+| `aur.txt`           | aur           | AUR: `walker-bin`, `elephant-bin` and providers, `brave-bin`, `blueberry`, `ttf-ia-writer`, Catppuccin Macchiato GTK theme and cursors |
 | `development.txt`   | development   | Official: Docker, mise, PHP build dependencies, shellcheck/shfmt |
 | `optional.txt`      | optional      | Official extras (alacritty, kvantum, ...) |
 | `stow.txt`          | dotfiles      | Stow groups to link, in order |
@@ -108,8 +108,8 @@ was merged into `mesa`; `nvidia-dkms` is gone in favour of `nvidia-open-dkms`.
 
 ## Dotfiles
 
-Each top-level directory (`alacritty`, `bash`, `ghostty`, `gtk`, `hypr`,
-`mako`, `nvim`, `waybar`) is a Stow package mirroring `$HOME`. The default
+Each top-level directory (`alacritty`, `bash`, `brave`, `ghostty`, `gtk`, `hypr`,
+`mako`, `nvim`, `scripts`, `waybar`) is a Stow package mirroring `$HOME`. The default
 set is in `packages/stow.txt`; `alacritty` is an opt-in alternative to Ghostty.
 
 ```bash
@@ -128,7 +128,42 @@ Existing files are never overwritten:
   `--backup-conflicts` to move the files to `~/.dotfiles-backup/` first.
 - Links that already point into this repo are fine; `--restow` refreshes them.
 
-Secrets go in `~/.bashrc.secrets` (sourced by `bash/.bashrc`, ignored by git).
+### Secrets
+
+Anything sensitive lives outside the repo, mirroring `.zshrc.secrets` /
+`.zshenv.secrets` in macos-dotfiles:
+
+| File                      | Sourced by           | Put here |
+|---------------------------|----------------------|----------|
+| `~/.bash_profile.secrets` | `bash/.bash_profile` | `export` statements (tokens such as `NPM_TOKEN`) so GUI apps and the Hyprland session inherit them |
+| `~/.bashrc.secrets`       | `bash/.bashrc`       | private aliases and functions for interactive shells |
+
+The dotfiles stage creates both files empty with mode 600 and never touches
+them again. `.gitignore` excludes `*.secrets*`, so they cannot be committed.
+
+### Shell aliases
+
+`bash/.bashrc` carries the same aliases as the macOS `.zshrc` (`g`, `ga`,
+`gd`, `gdc`, `gc`, `gch`, `gs`, `gb`, `pull`, `push`, `pullc`, `pushc`, `co`,
+`s`, `art`, `ni`, `nrd`, `vi`, `vim`, `q`, `ss`) plus `killdns`, which flushes
+systemd-resolved if it is in use. `bash/.inputrc` adds the Alt+Left/Right word
+movement bindings. `~/.local/bin` is on `PATH` via `bash/.bash_profile`.
+
+### Brave
+
+`brave-bin` is installed by the aur stage and bound to SUPER+B. The macOS
+`setup-brave.sh` is split into its Linux equivalents:
+
+- `etc/brave/policies/managed/policies.json` (installed by the services stage):
+  Rewards, Wallet, VPN, Leo AI and News off; third-party cookies blocked;
+  telemetry, search suggestions and cloud spell-check off; downloads bar,
+  incognito and devtools kept. Check `brave://policy`.
+- `brave/.config/brave-flags.conf`: native Wayland, passwords in
+  gnome-keyring, two-finger swipe navigation.
+- `scripts/.local/bin/brave-setup`: patches every profile's `Preferences`
+  (toolbar and new-tab cleanup, devtools undocked with source maps, autofill
+  off, memory saver on) and sets Brave as the default browser. Run it once
+  with Brave closed after the first launch has created a profile.
 
 ### Adding a configuration
 
@@ -229,7 +264,7 @@ lib/common.sh     logging, dry-run wrappers, pacman/yay/systemd helpers, GPU det
 lib/stow.sh       conflict detection, backups, (re)stow
 stages/*.sh       one script per stage, runnable on their own
 packages/*.txt    declarative package and stow inventories
-etc/              system files installed by the services stage (greetd)
+etc/              system files installed by the services stage (greetd, Brave policies)
 tests/            test suite and command stubs
-<group>/          Stow packages (alacritty, bash, ghostty, gtk, hypr, mako, nvim, waybar)
+<group>/          Stow packages (alacritty, bash, brave, ghostty, gtk, hypr, mako, nvim, scripts, waybar)
 ```

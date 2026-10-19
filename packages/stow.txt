@@ -1,11 +1,13 @@
 # Stow groups linked into $HOME by the "dotfiles" stage, in order.
 # Each name is a top-level directory in this repository.
 bash
+brave
 ghostty
 gtk
 hypr
 mako
 nvim
+scripts
 waybar
 # Opt-in alternative: ./install.sh --stage dotfiles alacritty
 # alacritty

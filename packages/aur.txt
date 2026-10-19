@@ -19,6 +19,9 @@ elephant-windows-bin
 elephant-unicode-bin
 walker-bin
 
+# Web browser (binary release maintained by Brave); policies in etc/brave, flags in brave/
+brave-bin
+
 # Bluetooth GUI used by the Waybar bluetooth module (blueman is the official alternative)
 blueberry
 

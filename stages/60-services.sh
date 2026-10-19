@@ -59,6 +59,20 @@ if pkg_installed gnome-keyring; then
   enable_user_service gcr-ssh-agent.socket
 fi
 
+# --- Brave managed policies ----------------------------------------------------
+# Site-wide Brave settings (bloat off, privacy, telemetry) ported from the macOS
+# plist. Per-profile preferences are applied by the stowed `brave-setup` script.
+BRAVE_POLICY_FILE=${BRAVE_POLICY_FILE:-/etc/brave/policies/managed/policies.json}
+if pkg_installed brave-bin; then
+  log "Brave policies"
+  if cmp -s "$DOTFILES_DIR/etc/brave/policies/managed/policies.json" "$BRAVE_POLICY_FILE" 2>/dev/null; then
+    info "$BRAVE_POLICY_FILE already up to date."
+  else
+    run_sudo install -Dm644 "$DOTFILES_DIR/etc/brave/policies/managed/policies.json" "$BRAVE_POLICY_FILE"
+    info "Run 'brave-setup' (with Brave closed) to apply the per-profile preferences."
+  fi
+fi
+
 # --- Docker -------------------------------------------------------------------
 if pkg_installed docker; then
   log "Docker"

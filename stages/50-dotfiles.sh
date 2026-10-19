@@ -30,6 +30,16 @@ for pkg in "${packages[@]}"; do
   stow_package "$pkg" || failed+=("$pkg")
 done
 
+# Private, git-ignored secrets files sourced by bash/.bashrc (aliases) and
+# bash/.bash_profile (exports). Created empty with mode 600; never overwritten.
+for secrets in "$STOW_TARGET/.bashrc.secrets" "$STOW_TARGET/.bash_profile.secrets"; do
+  if [[ -e "$secrets" ]]; then
+    info "$secrets exists; leaving it alone."
+  else
+    run install -m600 /dev/null "$secrets"
+  fi
+done
+
 # Create ~/Documents, ~/Pictures (hyprshot's default save dir) etc. if missing.
 if have xdg-user-dirs-update; then
   run xdg-user-dirs-update

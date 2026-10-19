@@ -1,0 +1,7 @@
+# Readline: keep the system defaults (Ctrl+Left/Right word movement, Home/End)
+# and add the Alt+Left/Right variants some terminals send, as in .zshrc on macOS.
+$include /etc/inputrc
+"\e[1;3D": backward-word
+"\e[1;3C": forward-word
+"\eb": backward-word
+"\ef": forward-word

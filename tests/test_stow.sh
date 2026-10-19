@@ -29,6 +29,18 @@ test_stows_into_empty_home_and_is_idempotent() {
   assert_contains "$OUT" "Stowing bash"
 }
 
+test_secrets_files_created_private_and_kept() {
+  capture bash "$REPO_DIR/stages/50-dotfiles.sh" bash
+  assert_eq 0 "$RC" "$OUT"
+  assert_file "$HOME/.bashrc.secrets"
+  assert_file "$HOME/.bash_profile.secrets"
+  assert_eq 600 "$(stat -f %Lp "$HOME/.bashrc.secrets" 2>/dev/null || stat -c %a "$HOME/.bashrc.secrets")"
+  echo 'export NPM_TOKEN=x' >"$HOME/.bash_profile.secrets"
+  capture bash "$REPO_DIR/stages/50-dotfiles.sh" bash
+  assert_eq 'export NPM_TOKEN=x' "$(cat "$HOME/.bash_profile.secrets")"
+  assert_contains "$OUT" ".bash_profile.secrets exists"
+}
+
 test_single_group_selection() {
   make_fixture
   capture stage app
