@@ -24,7 +24,11 @@ brave-bin
 
 # Applications. 1password is maintained by 1Password;
 # claude-code provides the "claude" CLI used by scripts/.local/bin/aicommit
-1password slack-desktop tableplus claude-code
+1password slack-desktop claude-code
+# tableplus: disabled 2026-10-20. The AUR PKGBUILD (0.1.316) downloads a .deb that
+# TablePlus has removed from deb.tableplus.com (now 2.0.2-320), so it 404s.
+# Re-enable once the AUR package is bumped: https://aur.archlinux.org/packages/tableplus
+# tableplus
 
 # Bluetooth GUI used by the Waybar bluetooth module (blueman is the official alternative)
 blueberry

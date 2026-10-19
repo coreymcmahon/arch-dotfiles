@@ -88,7 +88,7 @@ Declarative lists under `packages/`, one or more names per line, `#` comments:
 | `system.txt`        | system        | Official: shell tools, editors, Ghostty, tmux, Stow, Neovim helpers |
 | `desktop.txt`       | desktop       | Official: Hyprland ecosystem, Waybar, Mako, fonts, Qt/Wayland, Dolphin, Bluetooth, PipeWire, Obsidian, spotify-launcher, Tailscale |
 | `gpu-{amd,intel,nvidia,virtual}.txt` | desktop | Official: drivers chosen by PCI vendor detection |
-| `aur.txt`           | aur           | AUR: `walker-bin`, `elephant-bin` and providers, `brave-bin`, `1password`, `slack-desktop`, `tableplus`, `claude-code`, `blueberry`, `ttf-ia-writer`, Catppuccin Macchiato GTK theme and cursors |
+| `aur.txt`           | aur           | AUR: `walker-bin`, `elephant-bin` and providers, `brave-bin`, `1password`, `slack-desktop`, `claude-code`, `blueberry`, `ttf-ia-writer`, Catppuccin Macchiato GTK theme and cursors |
 | `development.txt`   | development   | Official: Docker, mise, PHP build dependencies, shellcheck/shfmt |
 | `optional.txt`      | optional      | Official extras (alacritty, kvantum, ...) |
 | `stow.txt`          | dotfiles      | Stow groups to link, in order |
@@ -155,8 +155,9 @@ Desktop applications: Obsidian, Spotify (`spotify-launcher`
 downloads the client; `spotify/` passes the Wayland flags), Tailscale
 (`tailscaled.service` is enabled by the services stage; join with
 `sudo tailscale up`), 1Password (started in the tray by hyprland.conf),
-Slack, TablePlus and Claude Code (`claude`, used by
-`scripts/.local/bin/aicommit`). tmux is installed with its config stowed from
+Slack and Claude Code (`claude`, used by
+`scripts/.local/bin/aicommit`). TablePlus is listed but commented out in
+`packages/aur.txt` until its AUR package catches up with upstream. tmux is installed with its config stowed from
 `tmux/`. `EDITOR` and `VISUAL` are set to `nvim` in `bash/.bash_profile`.
 
 ### Brave
