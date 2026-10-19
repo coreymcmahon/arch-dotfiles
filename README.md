@@ -165,10 +165,13 @@ Slack, TablePlus and Claude Code (`claude`, used by
 configuration has three parts:
 
 - `etc/brave/policies/managed/policies.json` (installed by the services stage):
-  Rewards, Wallet, VPN, Leo AI and News off; third-party cookies blocked;
-  telemetry (metrics, URL-keyed data, P3A, stats ping), search suggestions and
-  cloud spell-check off; background mode and the default-browser nag off;
-  incognito and devtools kept. Every key was checked against Brave's and
+  Rewards, Wallet, VPN, Leo and local AI, News, Playlist, Email Aliases and
+  price tracking off; third-party cookies blocked and Global Privacy Control
+  sent; telemetry and other outbound data (metrics, URL-keyed data, P3A, stats
+  ping, Web Discovery, Wayback Machine lookups, error-page suggestions,
+  password leak checks, payment-method queries), search suggestions and cloud
+  spell-check off; background mode and the default-browser nag off; incognito
+  and devtools kept. Every key was checked against Brave's and
   Chromium's policy templates (checked 2026-10-19). Do Not Track has no
   policy, so `brave-setup` sets it per profile. Check `brave://policy`;
   unknown names show up there as errors.

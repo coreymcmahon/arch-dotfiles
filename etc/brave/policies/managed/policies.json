@@ -3,11 +3,17 @@
   "BraveWalletDisabled": true,
   "BraveVPNDisabled": true,
   "BraveAIChatEnabled": false,
+  "BraveLocalAIEnabled": false,
   "BraveNewsDisabled": true,
+  "EmailAliasesEnabled": false,
+  "BravePlaylistEnabled": false,
+  "ShoppingListEnabled": false,
 
   "BlockThirdPartyCookies": true,
+  "BraveGlobalPrivacyControlEnabled": true,
   "SearchSuggestEnabled": false,
   "NetworkPredictionOptions": 2,
+  "PaymentMethodQueryEnabled": false,
 
   "SafeBrowsingExtendedReportingEnabled": false,
   "MetricsReportingEnabled": false,
@@ -15,6 +21,10 @@
   "SpellCheckServiceEnabled": false,
   "BraveP3AEnabled": false,
   "BraveStatsPingEnabled": false,
+  "BraveWebDiscoveryEnabled": false,
+  "BraveWaybackMachineEnabled": false,
+  "AlternateErrorPagesEnabled": false,
+  "PasswordLeakDetectionEnabled": false,
 
   "RemoteAccessHostFirewallTraversal": false,
 
