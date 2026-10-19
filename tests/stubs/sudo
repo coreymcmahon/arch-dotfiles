@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+echo "sudo $*" >>"${STUB_LOG:-/dev/null}"
+case "$1" in -v|-n) exit 0 ;; esac
+exec "$@"

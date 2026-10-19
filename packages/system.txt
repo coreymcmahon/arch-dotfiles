@@ -1,0 +1,26 @@
+# Baseline CLI toolset (official repos). Installed by the "system" stage.
+# One or more package names per line; "#" starts a comment.
+
+# Build + VCS prerequisites (archinstall already provides these; --needed makes it a no-op)
+base-devel git openssh sudo
+
+# Editors
+neovim nano
+
+# Networking / transfer
+curl wget rsync whois inetutils
+
+# Docs and shell
+man-db man-pages bash-completion less tree
+
+# Archives
+unzip zip tar
+
+# Monitoring
+htop btop
+
+# Terminal, multiplexer, dotfile manager
+alacritty zellij stow
+
+# Neovim helpers: telescope (ripgrep, fd), mason downloads (unzip above), clipboard
+ripgrep fd fzf jq wl-clipboard

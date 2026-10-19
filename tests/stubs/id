@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# id stub: "-nG user" prints STUB_GROUPS; anything else defers to the real id.
+echo "id $*" >>"${STUB_LOG:-/dev/null}"
+if [[ "$1" == -nG ]]; then echo "${STUB_GROUPS:-users}"; exit 0; fi
+exec /usr/bin/id "$@"

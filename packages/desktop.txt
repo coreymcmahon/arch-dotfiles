@@ -1,0 +1,35 @@
+# Hyprland desktop (official repos). Installed by the "desktop" stage.
+# GPU drivers are selected separately from packages/gpu-*.txt.
+
+# Compositor and Hypr ecosystem
+hyprland hyprpaper hypridle hyprlock hyprpicker hyprshot hyprsunset
+xdg-desktop-portal-hyprland xdg-desktop-portal-gtk
+
+# Polkit agent (launched from hyprland.conf)
+polkit-gnome
+
+# Bar, notifications, OSD, wallpaper fallback
+waybar mako swayosd swaybg
+
+# Tools referenced by hyprland.conf / hypridle.conf / waybar
+brightnessctl playerctl pamixer wiremix libnotify libqalculate
+
+# Qt/Wayland integration and the file manager bound to SUPER+E
+qt5-wayland qt6-wayland dolphin
+
+# Bluetooth stack (Waybar bluetooth module; blueberry GUI comes from the AUR)
+bluez bluez-utils
+
+# Audio session (installed by archinstall's PipeWire profile; listed so a
+# minimal profile still works)
+pipewire pipewire-pulse wireplumber
+
+# Fonts used by the configs:
+#   alacritty/hyprlock -> "CaskaydiaMono Nerd Font"  (ttf-cascadia-mono-nerd)
+#   waybar             -> "JetbrainsMono Nerd Font"  (ttf-jetbrains-mono-nerd)
+#   waybar icons       -> Font Awesome               (otf-font-awesome)
+ttf-cascadia-mono-nerd ttf-jetbrains-mono-nerd otf-font-awesome
+noto-fonts noto-fonts-emoji noto-fonts-cjk noto-fonts-extra
+
+# Desktop integration
+xdg-utils xdg-user-dirs

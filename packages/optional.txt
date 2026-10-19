@@ -1,0 +1,14 @@
+# Optional official packages. Not part of the default run:
+#   ./install.sh --stage optional
+
+# Alternative terminal (stow the "kitty" group if you switch)
+kitty
+
+# Qt theme engine referenced by QT_STYLE_OVERRIDE in hyprland.conf
+kvantum
+
+# Clean logout/shutdown dialog and plugin manager for Hyprland
+hyprshutdown hyprpm
+
+# Compression helper used by docker save/load
+pigz

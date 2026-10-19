@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+echo "yay $*" >>"${STUB_LOG:-/dev/null}"
+[[ "$1" == --version ]] && echo "yay v0.0-stub"
+exit 0

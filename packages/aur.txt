@@ -1,0 +1,26 @@
+# AUR packages. Installed by the "aur" stage via yay, always as the regular user.
+# Prefer official packages whenever one exists; everything here was checked
+# against the AUR on 2026-10-19.
+
+# Walker launcher (prebuilt) and its elephant backend + providers.
+# elephant-bin provides "elephant", so walker-bin's dependency resolves to it
+# instead of compiling the Go sources.
+elephant-bin
+elephant-desktopapplications-bin
+elephant-runner-bin
+elephant-calc-bin
+elephant-clipboard-bin
+elephant-files-bin
+elephant-symbols-bin
+elephant-websearch-bin
+elephant-menus-bin
+elephant-providerlist-bin
+elephant-windows-bin
+elephant-unicode-bin
+walker-bin
+
+# Bluetooth GUI used by the Waybar bluetooth module (blueman is the official alternative)
+blueberry
+
+# Fonts
+ttf-ia-writer

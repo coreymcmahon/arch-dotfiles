@@ -1,0 +1,3 @@
+# Intel. intel-media-driver covers Broadwell (2014) and newer; older iGPUs
+# need libva-intel-driver instead.
+mesa vulkan-intel intel-media-driver

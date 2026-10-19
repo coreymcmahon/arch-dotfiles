@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+echo "xdg-user-dirs-update $*" >>"${STUB_LOG:-/dev/null}"
+exit 0

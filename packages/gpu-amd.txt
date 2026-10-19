@@ -1,0 +1,2 @@
+# AMD (radeon/amdgpu). VA-API is included in mesa since 25.x.
+mesa vulkan-radeon

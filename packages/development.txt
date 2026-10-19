@@ -1,0 +1,18 @@
+# Development tooling (official repos). Installed by the "development" stage.
+
+# Containers (service enabled by the services stage)
+docker docker-compose docker-buildx
+
+# Runtime version manager (Node.js, PHP, Go are installed through it)
+mise
+
+# PHP build dependencies for mise's php backend (vfox-php, compiled from
+# source). Maps the upstream Debian list to Arch:
+#   build-essential/autoconf/bison/pkg-config -> base-devel
+re2c libxml2 openssl icu libzip oniguruma libpng libjpeg-turbo
+freetype2 libwebp gmp libsodium readline bzip2 zlib
+# Extras for the asdf-php fallback backend and common extensions (gd, pgsql, sqlite)
+gd postgresql-libs sqlite libedit
+
+# Shell linting for this repo's own tests
+shellcheck shfmt

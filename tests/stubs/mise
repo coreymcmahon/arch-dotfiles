@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+echo "mise $*" >>"${STUB_LOG:-/dev/null}"
+if [[ "$1" == ls && "$2" == --installed ]]; then
+  [[ " ${STUB_MISE_INSTALLED:-} " == *" $3 "* ]] && echo "$3  1.0.0  ~/.config/mise/config.toml  latest"
+fi
+exit 0

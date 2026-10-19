@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# pacman stub. STUB_INSTALLED lists "installed" packages; everything else is
+# missing. -T prints missing targets and exits 127 like real pacman.
+echo "pacman $*" >>"${STUB_LOG:-/dev/null}"
+case "$1" in
+  -T)
+    shift; rc=0
+    for p in "$@"; do
+      if [[ " ${STUB_INSTALLED:-} " != *" $p "* ]]; then echo "$p"; rc=127; fi
+    done
+    exit $rc ;;
+  -Qq) [[ " ${STUB_INSTALLED:-} " == *" $2 "* ]] ;;
+  *) exit 0 ;;
+esac

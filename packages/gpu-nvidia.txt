@@ -1,0 +1,4 @@
+# NVIDIA open kernel modules (Turing and newer). Kernel headers for DKMS are
+# added automatically per installed kernel. nvidia-dkms (proprietary) is no
+# longer in the official repos.
+nvidia-open-dkms nvidia-utils

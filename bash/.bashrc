@@ -9,9 +9,11 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 PS1='[\u@\h \W]\$ '
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+###
+# mise (manages Node.js, PHP and Go; installed by the development stage)
+if command -v mise >/dev/null 2>&1; then
+    eval "$(mise activate bash)"
+fi
 
 ###
 # Variables and settings used in interactive shells
